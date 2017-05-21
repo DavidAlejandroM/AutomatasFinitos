@@ -440,9 +440,14 @@ public class Controlador {
     }
 
     public ArrayList<String> obtenerSimbolos() {
-        if (af != null) {
+        if (selector == 1) {
             return af.getSimbolos();
-        } else {
+        }
+        else if(selector == 2)
+        {
+            return af2.getSimbolos();
+        }
+        else {
             return null;
         }
 
@@ -828,5 +833,11 @@ public class Controlador {
 
     public void modificarEstado(String estadoSig, int row, int col) {
         
+    }
+
+    public void modificarTransicion(String estadoSiguiente, String estadoActual, String simbolo) {
+        System.out.println("EA: "+estadoActual+", SE: "+simbolo+" ES: "+estadoSiguiente);
+        
+        //agregarTransicion(estadoActual, simbolo, estadoSiguiente);
     }
 }
