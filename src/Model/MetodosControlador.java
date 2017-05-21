@@ -70,6 +70,12 @@ public class MetodosControlador {
         return matriz;
     }
     
+    /**
+     * genera y abre una imagen con el automata para que se pueda imprimir
+     * @param text
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void generarImagen(String text) throws FileNotFoundException, IOException
     {
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -97,8 +103,8 @@ public class MetodosControlador {
         g2d.drawString(text, 0, fm.getAscent());
         g2d.dispose();
         try {
-            ImageIO.write(img, "png", new File("C:\\temp\\Text.png"));
-            Desktop.getDesktop().open(new File("C:\\temp\\Text.png"));
+            ImageIO.write(img, "png", new File("Text.png"));
+            Desktop.getDesktop().open(new File("Text.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
