@@ -285,5 +285,10 @@ public class Estado {
         return tran;
 
     }
+    
+    public void eliminarTransicion(int posSimbolo)
+    {
+        this.transiciones[posSimbolo] = new Estado();
+    }
 
 }

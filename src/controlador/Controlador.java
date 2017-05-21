@@ -837,6 +837,13 @@ public class Controlador {
     }
 
     public void modificarTransicion(String estadoSiguiente, String estadoActual, String simbolo) {
+        AutomataFinito afAux = null;
+        
+        if (selector == 1) {
+            Estado estado  = af.getEstado(metodos.buscarEstado(obtenerEstados(), estadoActual));
+            estado.eliminarTransicion(metodos.buscarSimbolo(obtenerSimbolos(), simbolo));
+            estado.setTransicion(af.getEstado(metodos.buscarEstado(obtenerEstados(), estadoSiguiente)), metodos.buscarSimbolo(obtenerSimbolos(), simbolo));
+        }
         System.out.println("EA: "+estadoActual+", SE: "+simbolo+" ES: "+estadoSiguiente);
         
         //agregarTransicion(estadoActual, simbolo, estadoSiguiente);
