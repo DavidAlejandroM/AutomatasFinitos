@@ -6,6 +6,7 @@
 package vista;
 
 import Model.Estado;
+import Model.MetodosControlador;
 import controlador.Controlador;
 import java.awt.Color;
 import java.awt.Component;
@@ -320,7 +321,7 @@ public class PanelTransiciones extends javax.swing.JPanel {
                     Point p = me.getPoint();
                     int row = table.rowAtPoint(p);
                     int col = table.columnAtPoint(p);
-                    if (me.getClickCount() == 2) {
+                    if (me.getClickCount() == 2 && col>0) {
                         Controlador controlador = Controlador.getInstance();
                         ArrayList<Estado> estados = controlador.obtenerEstados();
                         JFrame frame = new JFrame("Estados Sguientes");
@@ -334,19 +335,15 @@ public class PanelTransiciones extends javax.swing.JPanel {
                             ActionListener l = new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                    if (simbolo != null) {
-                                       simbolo.setEnabled(true);
-                                    }
-                                    if (colorFondoBotones != null && simbolo != null) {
-                                        simbolo.setBackground(colorFondoBotones);
-                                    }
-                                    colorFondoBotones = btn.getBackground();
-                                    btn.setEnabled(false);
-                                    btn.setBackground(Color.gray);
-                                    simbolo = btn;
+                                    ArrayList<String> estados = controlador.obtenerEstadosString();
+                                    ArrayList<String> simbolos = controlador.obtenerSimbolos();
+                                    String estado = btn.getText();
+                                    controlador.modificarTransicion(estado,estados.get(row),simbolos.get(col-1));
+                                    frame.dispose();
+                                    crearTabla();
                                 }
                             };
-                btn.addActionListener(l);
+                            btn.addActionListener(l);
 
                             
                             pn.add(btn);
@@ -354,7 +351,7 @@ public class PanelTransiciones extends javax.swing.JPanel {
                         frame.add(pn);
                         frame.setVisible(true);
                         String estadoSig = "";
-                        controlador.modificarEstado(estadoSig,row,col);
+                        
                     }
                 }
 });
